@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.0'
+}
+
+group 'guru.qa'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+def allureVersion = "2.18.1",
+    selenideVersion = "6.8.1",
+    junitVersion = "5.9.0",
+    slf4jVersion = "2.0.3",
+    aeonbitsVersion = "1.0.12"
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion",
+            "org.aeonbits.owner:owner:$aeonbitsVersion"
+
+    )
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task telegram_test (type: Test) {
+    useJUnitPlatform {
+        includeTags "telegram_test"
+    }
+}
+
+test {
+
+}
