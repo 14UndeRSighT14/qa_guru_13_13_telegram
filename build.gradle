@@ -14,7 +14,7 @@ def allureVersion = "2.18.1",
     selenideVersion = "6.8.1",
     junitVersion = "5.9.0",
     slf4jVersion = "2.0.3",
-    aeonbitsVersion = "1.0.12"
+        aeonbitsVersion = "1.0.12"
 
 allure {
     report {
@@ -55,7 +55,7 @@ tasks.withType(Test) {
 
 task telegram_test (type: Test) {
     useJUnitPlatform {
-        includeTags "telegram_test"
+        includeTags "telegram"
     }
 }
 
