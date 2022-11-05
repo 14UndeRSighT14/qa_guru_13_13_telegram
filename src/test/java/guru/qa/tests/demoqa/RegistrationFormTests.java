@@ -12,7 +12,7 @@ import static io.qameta.allure.Allure.step;
 public class RegistrationFormTests extends TestBase {
 
     @Test
-    @Tag("dz")
+    @Tag("telegram")
     @DisplayName("Successful fill form")
     void successTest() {
         String firstName = "Slava";
